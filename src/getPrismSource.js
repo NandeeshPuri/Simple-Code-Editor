@@ -33,7 +33,6 @@ const pluginsJs = {}
 // const pluginsCss = []
 basicPlugins.forEach(item => {
     if (item === 'copy-to-clipboard') {
-        //修改逻辑，让每次修改后都能拿到最新的值
         pluginsJs[item] = require(`!!raw-loader!./prism-${item}.js`).default
         //pluginsJs[item] = require(`!!raw-loader!prismjs/plugins/${item}/prism-${item}.js`).default
     } else {

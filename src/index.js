@@ -274,7 +274,6 @@ class Editor extends React.Component {
         this.setLineNumbersStyle(theme)
         this.setPrismScript()
         this.setPluginsScript()
-        //php等语言需要先引入这个
         this.setLanguageScript('markup-templating')
 
         this.Prism = window.Prism
@@ -322,7 +321,6 @@ class Editor extends React.Component {
         if (document.querySelector(`#${domName}`)) {
             // if (this[domName] || window[domName]) {
             return  document.body.removeChild(this[domName])
-            //script必须每次通过appendChild的方式才会重新执行，所以先要remove掉
            
         } else {
             this.addedDomNames.push(domName)
@@ -355,12 +353,10 @@ class Editor extends React.Component {
             content: this.getContent(code, language)
         }, () => {
             // const container = this.pre.parentNode
-            //去掉 toolbar，但是不能改container的className，否则每次keyUp光变都要消失
             // container.className = container.className.replace(/code-toolbar/g, '')
             //const toolbar = container.querySelector('.toolbar')
             // toolbar && container.removeChild(toolbar)
 
-            //重新执行Prism的complete操作，linenumber,toobar等插件都在complete里挂载了回调方法
             this.Prism.hooks.run('complete', { language, code, element: this.pre.querySelector('code') })
             // this.styleLineNumbers()
         })
